@@ -142,6 +142,9 @@ export function OpenAISection({
                             {entry.proxyUrl && (
                               <span className={styles.apiKeyEntryProxy}>{entry.proxyUrl}</span>
                             )}
+                            {entry.remark && (
+                              <span className={styles.apiKeyEntryRemark}>{entry.remark}</span>
+                            )}
                             <div className={styles.apiKeyEntryStats}>
                               <span
                                 className={`${styles.apiKeyEntryStat} ${styles.apiKeyEntryStatSuccess}`}

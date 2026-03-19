@@ -118,7 +118,24 @@
     "usage_stats": "Usage Statistics",
     "config_management": "Config Panel",
     "logs": "Logs Viewer",
+    "audit_logs": "Audit Logs",
     "system_info": "Management Center Info"
+  },
+  "audit_logs": {
+    "title": "Audit Logs",
+    "search": "Search",
+    "principal": "Principal",
+    "provider": "Access Provider",
+    "method": "Method",
+    "request_id": "Request ID",
+    "client_ip": "Client IP",
+    "detail_title": "Audit Detail",
+    "empty_title": "No audit logs yet",
+    "empty_desc": "Once request logging is enabled, complete searchable conversations appear here.",
+    "load_error": "Failed to load audit logs",
+    "content_load_error": "Failed to load audit detail",
+    "download_success": "Audit log downloaded",
+    "download_error": "Failed to download audit log"
   },
   "dashboard": {
     "title": "Dashboard",

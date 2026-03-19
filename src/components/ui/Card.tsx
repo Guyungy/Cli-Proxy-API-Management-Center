@@ -8,7 +8,7 @@ interface CardProps {
 
 export function Card({ title, extra, children, className }: PropsWithChildren<CardProps>) {
   return (
-    <div className={className ? `card ${className}` : 'card'}>
+    <div className={className ? `card ${className}` : 'card'} data-slot="card">
       {(title || extra) && (
         <div className="card-header">
           <div className="title">{title}</div>

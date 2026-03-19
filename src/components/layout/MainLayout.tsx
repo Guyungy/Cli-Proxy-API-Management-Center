@@ -429,6 +429,7 @@ export function MainLayout() {
     ...(config?.loggingToFile
       ? [{ path: '/logs', label: t('nav.logs'), icon: sidebarIcons.logs }]
       : []),
+    ...(config?.requestLog ? [{ path: '/audit-logs', label: t('nav.audit_logs'), icon: sidebarIcons.logs }] : []),
     { path: '/system', label: t('nav.system_info'), icon: sidebarIcons.system },
   ];
   const navOrder = navItems.map((item) => item.path);

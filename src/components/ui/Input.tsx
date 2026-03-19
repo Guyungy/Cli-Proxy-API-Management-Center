@@ -21,6 +21,7 @@ export function Input({ label, hint, error, rightElement, className = '', id, ..
         <input
           id={inputId}
           className={`input ${className}`.trim()}
+          data-slot="input"
           aria-invalid={Boolean(error) || rest['aria-invalid']}
           aria-describedby={describedBy}
           {...rest}

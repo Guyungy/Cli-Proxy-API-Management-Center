@@ -118,7 +118,24 @@
     "usage_stats": "使用统计",
     "config_management": "配置面板",
     "logs": "日志查看",
+    "audit_logs": "审计日志",
     "system_info": "中心信息"
+  },
+  "audit_logs": {
+    "title": "审计日志",
+    "search": "全文检索",
+    "principal": "调用方",
+    "provider": "认证来源",
+    "method": "请求方法",
+    "request_id": "请求 ID",
+    "client_ip": "客户端 IP",
+    "detail_title": "审计详情",
+    "empty_title": "暂无审计日志",
+    "empty_desc": "开启请求日志后，这里会显示可检索的完整会话记录。",
+    "load_error": "加载审计日志失败",
+    "content_load_error": "加载审计详情失败",
+    "download_success": "审计日志下载成功",
+    "download_error": "审计日志下载失败"
   },
   "dashboard": {
     "title": "仪表盘",

@@ -25,6 +25,36 @@ export interface ErrorLogsResponse {
   files?: ErrorLogFile[];
 }
 
+export interface RequestAuditLogFile {
+  name: string;
+  request_id: string;
+  method: string;
+  url: string;
+  client_ip: string;
+  principal: string;
+  provider: string;
+  status: number;
+  modified: number;
+  size: number;
+}
+
+export interface RequestAuditLogsQuery {
+  q?: string;
+  principal?: string;
+  provider?: string;
+  request_id?: string;
+  method?: string;
+}
+
+export interface RequestAuditLogsResponse {
+  files?: RequestAuditLogFile[];
+}
+
+export interface RequestAuditLogContentResponse {
+  file?: RequestAuditLogFile;
+  content?: string;
+}
+
 export const logsApi = {
   fetchLogs: (params: LogsQuery = {}): Promise<LogsResponse> =>
     apiClient.get('/logs', { params, timeout: LOGS_TIMEOUT_MS }),
@@ -45,4 +75,10 @@ export const logsApi = {
       responseType: 'blob',
       timeout: LOGS_TIMEOUT_MS
     }),
+
+  fetchRequestLogs: (params: RequestAuditLogsQuery = {}): Promise<RequestAuditLogsResponse> =>
+    apiClient.get('/request-logs', { params, timeout: LOGS_TIMEOUT_MS }),
+
+  fetchRequestLogContent: (id: string): Promise<RequestAuditLogContentResponse> =>
+    apiClient.get(`/request-log-content/${encodeURIComponent(id)}`, { timeout: LOGS_TIMEOUT_MS }),
 };

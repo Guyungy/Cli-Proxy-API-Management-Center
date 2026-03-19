@@ -6,33 +6,52 @@
   align-items: center;
   justify-content: center;
   gap: $spacing-sm;
-  border: 1px solid transparent;
-  border-radius: $radius-md;
-  padding: 10px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  min-height: 40px;
+  padding: 10px 16px;
   font-weight: 600;
+  font-size: 14px;
   cursor: pointer;
-  transition: all $transition-fast;
-  background-color: var(--bg-secondary);
-  color: var(--text-primary);
+  transition:
+    background-color $transition-fast,
+    border-color $transition-fast,
+    box-shadow $transition-fast,
+    color $transition-fast,
+    transform $transition-fast;
+  background-color: var(--secondary);
+  color: var(--secondary-foreground);
+  box-shadow: 0 1px 2px rgba(var(--shadow-color), 0.08);
+
+  &:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-1px);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px var(--ring);
+  }
 
   &.btn-primary {
     background-color: var(--primary-color);
     color: var(--primary-contrast, #fff);
-    border-color: var(--primary-color);
+    border-color: transparent;
+    box-shadow: 0 10px 24px -16px rgba(37, 99, 235, 0.9);
 
     &:hover {
       background-color: var(--primary-hover);
-      border-color: var(--primary-hover);
+      border-color: transparent;
     }
   }
 
   &.btn-secondary {
-    background-color: var(--bg-tertiary);
+    background-color: var(--card);
     border-color: var(--border-color);
-    color: var(--text-primary);
+    color: var(--card-foreground);
 
     &:hover {
-      background-color: var(--bg-hover, var(--bg-tertiary));
+      background-color: var(--secondary);
       border-color: var(--border-hover);
     }
   }
@@ -40,21 +59,23 @@
   &.btn-ghost {
     background: transparent;
     border-color: transparent;
-    color: var(--text-secondary);
+    color: var(--muted-foreground);
+    box-shadow: none;
 
     &:hover {
-      color: var(--text-primary);
-      background: var(--bg-tertiary);
+      color: var(--foreground);
+      background: var(--muted);
     }
   }
 
   &.btn-danger {
-    background-color: $error-color;
-    border-color: $error-color;
-    color: #fff;
+    background-color: var(--destructive);
+    border-color: transparent;
+    color: var(--destructive-foreground);
+    box-shadow: 0 10px 24px -16px rgba(220, 38, 38, 0.72);
 
     &:hover {
-      background-color: color.adjust($error-color, $lightness: -5%);
+      background-color: #b91c1c;
     }
   }
 
@@ -63,13 +84,15 @@
   }
 
   &.btn-sm {
-    padding: 8px 10px;
-    font-size: 14px;
+    min-height: 34px;
+    padding: 8px 12px;
+    font-size: 13px;
   }
 
   &:disabled {
     opacity: 0.6;
     cursor: not-allowed;
+    transform: none;
   }
 }
 
@@ -88,16 +111,22 @@
 textarea {
   width: 100%;
   border: 1px solid var(--border-color);
-  border-radius: $radius-md;
-  padding: 10px 12px;
-  background-color: var(--bg-secondary);
+  border-radius: var(--radius-sm);
+  min-height: 42px;
+  padding: 10px 14px;
+  background-color: var(--input);
   color: var(--text-primary);
-  transition: border-color $transition-fast, box-shadow $transition-fast;
+  box-shadow: inset 0 1px 2px rgba(var(--shadow-color), 0.03);
+  transition: border-color $transition-fast, box-shadow $transition-fast, background-color $transition-fast;
 
   &:focus {
     outline: none;
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba($primary-color, 0.18);
+    box-shadow: 0 0 0 4px var(--ring);
+  }
+
+  &::placeholder {
+    color: var(--text-tertiary);
   }
 }
 
@@ -109,7 +138,9 @@ textarea {
 
   label {
     font-weight: 600;
-    color: var(--text-primary);
+    font-size: 13px;
+    letter-spacing: 0.01em;
+    color: var(--text-secondary);
   }
 
   .hint {
@@ -119,9 +150,10 @@ textarea {
 }
 
 .card {
-  background-color: var(--bg-primary);
+  background: color-mix(in srgb, var(--bg-primary) 92%, transparent);
+  backdrop-filter: blur(18px);
   border: 1px solid var(--border-color);
-  border-radius: $radius-lg;
+  border-radius: var(--radius);
   box-shadow: var(--shadow);
   padding: $spacing-lg;
 }
@@ -212,10 +244,11 @@ textarea {
 
 .notification {
   padding: $spacing-md;
-  border-radius: $radius-md;
+  border-radius: var(--radius-sm);
   box-shadow: var(--shadow);
   border: 1px solid var(--border-color);
-  background: var(--bg-primary);
+  background: color-mix(in srgb, var(--bg-primary) 96%, transparent);
+  backdrop-filter: blur(12px);
   color: var(--text-primary);
   display: flex;
   justify-content: space-between;
@@ -364,7 +397,7 @@ textarea {
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.35);
+  background: rgba(2, 8, 23, 0.56);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -399,10 +432,11 @@ textarea {
 }
 
 .modal {
-  background: var(--bg-primary);
-  border-radius: $radius-lg;
+  background: color-mix(in srgb, var(--bg-primary) 96%, transparent);
+  backdrop-filter: blur(20px);
+  border-radius: var(--radius);
   border: 1px solid var(--border-color);
-  box-shadow: $shadow-lg;
+  box-shadow: var(--shadow-lg);
   max-height: 90vh;
   overflow: hidden;
   display: flex;
@@ -449,7 +483,7 @@ textarea {
   width: 32px;
   height: 32px;
   padding: 0;
-  background: var(--bg-secondary);
+  background: color-mix(in srgb, var(--bg-secondary) 86%, transparent);
   border: 1px solid var(--border-color);
   color: var(--text-secondary);
   cursor: pointer;
@@ -527,10 +561,10 @@ textarea {
 }
 
 .empty-state {
-  border: 1px dashed var(--border-color);
-  border-radius: $radius-lg;
+  border: 1px dashed var(--border-hover);
+  border-radius: var(--radius);
   padding: $spacing-lg;
-  background: var(--bg-secondary);
+  background: color-mix(in srgb, var(--bg-secondary) 82%, white 18%);
   display: flex;
   justify-content: space-between;
   gap: $spacing-md;
@@ -632,8 +666,8 @@ textarea {
 
 .error-box {
   background: rgba($error-color, 0.1);
-  border: 1px solid rgba($error-color, 0.4);
-  border-radius: $radius-md;
+  border: 1px solid rgba($error-color, 0.28);
+  border-radius: var(--radius-sm);
   padding: $spacing-sm $spacing-md;
   color: $error-color;
 }
@@ -720,9 +754,9 @@ textarea {
 }
 
 .log-viewer {
-  background: var(--bg-secondary);
+  background: color-mix(in srgb, var(--bg-secondary) 92%, transparent);
   border: 1px solid var(--border-color);
-  border-radius: $radius-md;
+  border-radius: var(--radius-sm);
   padding: $spacing-md;
   max-height: 520px;
   overflow: auto;

@@ -24,25 +24,31 @@
   display: flex;
   gap: $spacing-xs;
   margin-bottom: $spacing-lg;
-  border-bottom: 1px solid var(--border-color);
+  padding: 6px;
+  border: 1px solid var(--border-color);
+  border-radius: calc(var(--radius) - 4px);
+  background: color-mix(in srgb, var(--bg-primary) 88%, transparent);
+  backdrop-filter: blur(16px);
 }
 
 .tabItem {
   @include button-reset;
   padding: 12px 20px;
+  border-radius: calc(var(--radius-sm) - 2px);
   font-size: 14px;
   font-weight: 500;
   color: var(--text-secondary);
   background: transparent;
-  border-bottom: 2px solid transparent;
-  margin-bottom: -1px;
+  border: 1px solid transparent;
   cursor: pointer;
   transition:
     color 0.15s ease,
-    border-color 0.15s ease;
+    border-color 0.15s ease,
+    background-color 0.15s ease;
 
   &:hover {
     color: var(--text-primary);
+    background: var(--secondary);
   }
 
   &:focus,
@@ -54,7 +60,8 @@
 
 .tabActive {
   color: var(--primary-color);
-  border-bottom-color: var(--primary-color);
+  border-color: rgba($primary-color, 0.22);
+  background: linear-gradient(135deg, rgba($primary-color, 0.1), rgba(14, 165, 233, 0.1));
 }
 
 .content {
@@ -154,9 +161,10 @@
   gap: 8px;
   flex: 1 1 100%;
   padding: 8px 10px;
-  background: var(--bg-secondary);
+  background: color-mix(in srgb, var(--bg-secondary) 84%, transparent);
   border: 1px solid var(--border-color);
-  border-radius: $radius-md;
+  border-radius: var(--radius-sm);
+  backdrop-filter: blur(14px);
 }
 
 .filterChipGroup {
@@ -188,9 +196,9 @@
   align-items: center;
   gap: 4px;
   padding: 4px 10px;
-  border-radius: $radius-full;
+  border-radius: 999px;
   border: 1px solid var(--border-color);
-  background: var(--bg-primary);
+  background: color-mix(in srgb, var(--bg-primary) 92%, transparent);
   color: var(--text-secondary);
   font-size: 12px;
   line-height: 1.3;
@@ -315,9 +323,10 @@
 }
 
 .logPanel {
-  background: var(--bg-secondary);
+  background: color-mix(in srgb, var(--bg-secondary) 88%, transparent);
   border: 1px solid var(--border-color);
-  border-radius: $radius-md;
+  border-radius: var(--radius);
+  backdrop-filter: blur(16px);
   flex: 1 1 auto;
   min-height: 280px;
   max-height: calc(100vh - 320px);
@@ -357,7 +366,7 @@
   gap: $spacing-sm;
   padding: 8px 12px;
   border-bottom: 1px solid var(--border-color);
-  background: var(--bg-primary);
+  background: color-mix(in srgb, var(--bg-primary) 92%, transparent);
   color: var(--text-secondary);
   font-size: 12px;
 
@@ -428,7 +437,7 @@
   grid-template-columns: 170px 1fr;
   gap: $spacing-md;
   padding: 10px 12px;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid color-mix(in srgb, var(--border-color) 84%, transparent);
   border-left: 3px solid transparent;
   cursor: copy;
   font-family:
@@ -439,7 +448,7 @@
   color: var(--text-primary);
 
   &:hover {
-    background: rgba($primary-color, 0.06);
+    background: linear-gradient(90deg, rgba($primary-color, 0.08), transparent 75%);
   }
 
   @include tablet {
@@ -487,11 +496,11 @@
   display: inline-flex;
   align-items: center;
   padding: 2px 8px;
-  border-radius: $radius-full;
+  border-radius: 999px;
   font-size: 12px;
   font-weight: 800;
   border: 1px solid var(--border-color);
-  background: var(--bg-primary);
+  background: color-mix(in srgb, var(--bg-primary) 92%, transparent);
   color: var(--text-secondary);
   white-space: nowrap;
 }
@@ -500,11 +509,11 @@
   display: inline-flex;
   align-items: center;
   padding: 2px 8px;
-  border-radius: $radius-full;
+  border-radius: 999px;
   font-size: 12px;
   font-weight: 600;
   border: 1px solid var(--border-color);
-  background: var(--bg-primary);
+  background: color-mix(in srgb, var(--bg-primary) 92%, transparent);
   color: var(--text-secondary);
   white-space: nowrap;
 }
@@ -613,7 +622,7 @@
   display: inline-flex;
   align-items: center;
   padding: 2px 8px;
-  border-radius: $radius-full;
+  border-radius: 999px;
   border: 1px solid rgba($primary-color, 0.3);
   background: rgba($primary-color, 0.1);
   color: var(--primary-color);
@@ -639,7 +648,7 @@
 
 .traceNotice {
   padding: 8px 10px;
-  border-radius: $radius-md;
+  border-radius: var(--radius-sm);
   border: 1px solid var(--warning-border);
   background: var(--warning-bg);
   color: var(--warning-text);
@@ -677,8 +686,8 @@
   min-width: 0;
   padding: 8px 10px;
   border: 1px solid var(--border-color);
-  border-radius: $radius-md;
-  background: var(--bg-secondary);
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--bg-secondary) 84%, transparent);
 }
 
 .traceInfoItemWide {
@@ -702,11 +711,11 @@
   align-items: center;
   margin-left: 6px;
   padding: 0 6px;
-  border-radius: $radius-full;
+  border-radius: 999px;
   border: 1px solid var(--border-color);
   font-size: 11px;
   color: var(--text-secondary);
-  background: var(--bg-primary);
+  background: color-mix(in srgb, var(--bg-primary) 92%, transparent);
 }
 
 .traceCandidates {
@@ -719,9 +728,9 @@
 
 .traceCandidate {
   border: 1px solid var(--border-color);
-  border-radius: $radius-md;
+  border-radius: var(--radius-sm);
   padding: 10px;
-  background: var(--bg-secondary);
+  background: color-mix(in srgb, var(--bg-secondary) 84%, transparent);
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -738,7 +747,7 @@
   display: inline-flex;
   align-items: center;
   padding: 2px 8px;
-  border-radius: $radius-full;
+  border-radius: 999px;
   border: 1px solid var(--success-badge-border, #6ee7b7);
   font-size: 11px;
   font-weight: 700;

@@ -24,6 +24,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.5;
+  min-width: 320px;
 }
 
 #root {
@@ -36,6 +37,16 @@ input,
 textarea,
 select {
   font: inherit;
+}
+
+button {
+  background: none;
+  color: inherit;
+}
+
+pre,
+code {
+  font-family: $font-mono;
 }
 
 a {

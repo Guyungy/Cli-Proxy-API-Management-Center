@@ -182,19 +182,35 @@ export function LoginPage() {
 
   return (
     <div className={styles.container}>
-      {/* 左侧品牌展示区 */}
       <div className={styles.brandPanel}>
         <div className={styles.brandContent}>
-          <span className={styles.brandWord}>CLI</span>
-          <span className={styles.brandWord}>PROXY</span>
-          <span className={styles.brandWord}>API</span>
+          <div className={styles.brandBadge}>Proxy Governance</div>
+          <div className={styles.brandHeading}>
+            <h1 className={styles.brandTitle}>CLI Proxy API</h1>
+            <p className={styles.brandDescription}>
+              Unified access, audit-ready conversations, and a cleaner control surface for your
+              proxy infrastructure.
+            </p>
+          </div>
+          <div className={styles.brandStats}>
+            <div className={styles.brandStat}>
+              <span className={styles.brandStatValue}>Audit</span>
+              <span className={styles.brandStatLabel}>searchable request traces</span>
+            </div>
+            <div className={styles.brandStat}>
+              <span className={styles.brandStatValue}>Control</span>
+              <span className={styles.brandStatLabel}>live management + provider routing</span>
+            </div>
+            <div className={styles.brandStat}>
+              <span className={styles.brandStatValue}>Secure</span>
+              <span className={styles.brandStatLabel}>single entry for governed access</span>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* 右侧功能交互区 */}
       <div className={styles.formPanel}>
         {showSplash ? (
-          /* 启动动画 */
           <div className={styles.splashContent}>
             <img src={INLINE_LOGO_JPEG} alt="CPAMC" className={styles.splashLogo} />
             <h1 className={styles.splashTitle}>{t('splash.title')}</h1>
@@ -204,16 +220,19 @@ export function LoginPage() {
             </div>
           </div>
         ) : (
-          /* 登录表单 */
           <div className={styles.formContent}>
-            {/* Logo */}
-            <img src={INLINE_LOGO_JPEG} alt="Logo" className={styles.logo} />
+            <div className={styles.logoWrap}>
+              <img src={INLINE_LOGO_JPEG} alt="Logo" className={styles.logo} />
+            </div>
 
-            {/* 登录表单卡片 */}
             <div className={styles.loginCard}>
               <div className={styles.loginHeader}>
+                <div className={styles.eyebrow}>Management Access</div>
                 <div className={styles.titleRow}>
-                  <div className={styles.title}>{t('title.login')}</div>
+                  <div className={styles.titleBlock}>
+                    <div className={styles.title}>{t('title.login')}</div>
+                    <div className={styles.subtitle}>{t('login.subtitle')}</div>
+                  </div>
                   <Select
                     className={styles.languageSelect}
                     value={language}
@@ -223,13 +242,12 @@ export function LoginPage() {
                     ariaLabel={t('language.switch')}
                   />
                 </div>
-                <div className={styles.subtitle}>{t('login.subtitle')}</div>
               </div>
 
               <div className={styles.connectionBox}>
-                <div className={styles.label}>{t('login.connection_current')}</div>
-                <div className={styles.value}>{apiBase || detectedBase}</div>
-                <div className={styles.hint}>{t('login.connection_auto_hint')}</div>
+                <div className={styles.connectionLabel}>{t('login.connection_current')}</div>
+                <div className={styles.connectionValue}>{apiBase || detectedBase}</div>
+                <div className={styles.connectionHint}>{t('login.connection_auto_hint')}</div>
               </div>
 
               <div className={styles.toggleAdvanced}>
@@ -291,7 +309,7 @@ export function LoginPage() {
                 />
               </div>
 
-              <Button fullWidth onClick={handleSubmit} loading={loading}>
+              <Button fullWidth onClick={handleSubmit} loading={loading} className={styles.submitButton}>
                 {loading ? t('login.submitting') : t('login.submit_button')}
               </Button>
 

@@ -19,8 +19,8 @@
   height: 40px;
   padding: 0 12px;
   border: 1px solid var(--border-color);
-  border-radius: $radius-md;
-  background-color: var(--bg-primary);
+  border-radius: var(--radius-sm);
+  background-color: var(--input);
   box-shadow: var(--shadow);
   color: var(--text-primary);
   font-size: 13px;
@@ -36,12 +36,12 @@
 
   &:focus {
     outline: none;
-    box-shadow: var(--shadow), 0 0 0 3px rgba($primary-color, 0.18);
+    box-shadow: var(--shadow), 0 0 0 4px var(--ring);
   }
 
   &[aria-expanded='true'] {
     border-color: var(--primary-color);
-    box-shadow: var(--shadow), 0 0 0 3px rgba($primary-color, 0.18);
+    box-shadow: var(--shadow), 0 0 0 4px var(--ring);
   }
 }
 
@@ -72,11 +72,12 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  background: var(--bg-primary);
+  background: color-mix(in srgb, var(--bg-primary) 96%, transparent);
   border: 1px solid var(--border-color);
-  border-radius: $radius-lg;
+  border-radius: var(--radius);
   padding: 6px;
   box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(18px);
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -87,7 +88,7 @@
 
 .option {
   padding: 8px 12px;
-  border-radius: $radius-md;
+  border-radius: var(--radius-xs);
   border: 1px solid transparent;
   background: transparent;
   color: var(--text-primary);
@@ -105,7 +106,7 @@
 
 .optionActive {
   border-color: rgba($primary-color, 0.5);
-  background: rgba($primary-color, 0.1);
+  background: rgba($primary-color, 0.12);
   font-weight: 600;
 }
 

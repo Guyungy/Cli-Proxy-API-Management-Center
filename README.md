@@ -1,55 +1,55 @@
-# ⚙️ CLI Proxy API Management Center
+# ⚙️ CLI Proxy API 管理中心
 
-> A clean, single-file Web UI for managing and troubleshooting **CLI Proxy API**.
-> Connects to the **Management API** for config, credentials, logs, and usage insights.
+> 一个更顺手、更易读的单文件 Web UI，用来管理和排查 **CLI Proxy API**。
+> 它通过 **Management API** 完成配置、凭据、日志和使用统计等操作。
 
-[![Main Project](https://img.shields.io/badge/Main%20Project-CLIProxyAPI-2563eb?style=flat-square)](https://github.com/router-for-me/CLIProxyAPI)
-[![Minimum Version](https://img.shields.io/badge/Minimum%20Version-%E2%89%A5%206.8.0-16a34a?style=flat-square)](https://github.com/router-for-me/CLIProxyAPI)
-[![Recommended](https://img.shields.io/badge/Recommended-%E2%89%A5%206.8.15-0f766e?style=flat-square)](https://github.com/router-for-me/CLIProxyAPI)
-[![Single File UI](https://img.shields.io/badge/Build-Single%20HTML-f59e0b?style=flat-square)](#-build-and-release)
+[![主项目](https://img.shields.io/badge/Main%20Project-CLIProxyAPI-2563eb?style=flat-square)](https://github.com/router-for-me/CLIProxyAPI)
+[![最低版本](https://img.shields.io/badge/Minimum%20Version-%E2%89%A5%206.8.0-16a34a?style=flat-square)](https://github.com/router-for-me/CLIProxyAPI)
+[![推荐版本](https://img.shields.io/badge/Recommended-%E2%89%A5%206.8.15-0f766e?style=flat-square)](https://github.com/router-for-me/CLIProxyAPI)
+[![构建产物](https://img.shields.io/badge/Build-Single%20HTML-f59e0b?style=flat-square)](#-构建与发布)
 
-🌐 [中文文档](README_CN.md)
+🌐 [English](README.md)
 
-- **Main Project**: https://github.com/router-for-me/CLIProxyAPI
-- **Example URL**: https://remote.router-for.me/
-- **Minimum Version**: `>= 6.8.0`
-- **Recommended Version**: `>= 6.8.15`
+- **主项目**: https://github.com/router-for-me/CLIProxyAPI
+- **示例地址**: https://remote.router-for.me/
+- **最低版本要求**: `>= 6.8.0`
+- **推荐版本**: `>= 6.8.15`
 
 > [!TIP]
-> Since `6.0.19`, this Web UI is bundled with the main CLI Proxy API program.
-> Once the service is running, open `/management.html` on the API port.
+> 从 `6.0.19` 开始，这个 Web UI 已经随 CLI Proxy API 主程序一起提供。
+> 服务启动后，直接访问 API 端口上的 `/management.html` 即可。
 
 ---
 
-## ✨ TL;DR
+## ✨ 一眼看懂
 
-### 🚀 Already running CLI Proxy API?
+### 🚀 如果你已经在运行 CLI Proxy API
 
-Open:
+直接打开：
 
 ```text
 http://<host>:<api_port>/management.html
 ```
 
-Then enter your **management key** and connect.
+然后输入 **管理密钥** 即可连接。
 
-### 🛠 Want to develop locally?
+### 🛠 如果你想本地开发
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open `http://localhost:5173` and connect it to your CLI Proxy API backend.
+打开 `http://localhost:5173`，再连接到你的 CLI Proxy API 后端。
 
-### 📦 Want a standalone build?
+### 📦 如果你想构建单文件版本
 
 ```bash
 npm install
 npm run build
 ```
 
-Output:
+输出文件：
 
 ```text
 dist/index.html
@@ -57,23 +57,25 @@ dist/index.html
 
 ---
 
-## 📌 What this project is
+## 📌 这个项目是什么
 
-This repository contains the **Web UI only**.
+本仓库只包含 **Web 管理界面本身**。
 
-### ✅ It is used to
-- manage config
-- manage API keys and provider settings
-- upload auth files
-- inspect logs and usage data
-- troubleshoot management-side issues
+### ✅ 它可以做什么
 
-### ❌ It is not
-- the proxy server itself
-- a traffic forwarder
-- a replacement for the main CLI Proxy API project
+- 读取和更新配置
+- 管理 API Keys 与 provider 配置
+- 上传认证文件
+- 查看日志与使用统计
+- 做管理侧排障
 
-The UI talks to the CLI Proxy API **Management API** at:
+### ❌ 它不是什么
+
+- 代理服务本体
+- 流量转发器
+- CLI Proxy API 主项目的替代品
+
+Web UI 通过下面这个管理接口和后端通信：
 
 ```text
 /v0/management
@@ -81,37 +83,37 @@ The UI talks to the CLI Proxy API **Management API** at:
 
 ---
 
-## 🚀 Quick Start
+## 🚀 快速开始
 
-### Option A — Use the bundled UI (recommended)
+### 方式 A — 使用 CLI Proxy API 自带的 Web UI（推荐）
 
-1. Start CLI Proxy API.
-2. Open:
+1. 启动 CLI Proxy API。
+2. 打开：
 
    ```text
    http://<host>:<api_port>/management.html
    ```
 
-3. Enter the **management key**.
-4. Connect.
+3. 输入 **管理密钥**。
+4. 点击连接。
 
 > [!NOTE]
-> The UI auto-detects the server address from the current page URL, but you can still override it manually.
+> 页面会根据当前 URL 自动推断后端地址，但你也可以手动改成其他地址。
 
-### Option B — Run the dev server
+### 方式 B — 启动开发服务器
 
 ```bash
 npm install
 npm run dev
 ```
 
-Then open:
+然后打开：
 
 ```text
 http://localhost:5173
 ```
 
-### Option C — Build a single HTML file
+### 方式 C — 构建单文件 HTML
 
 ```bash
 npm install
@@ -119,144 +121,156 @@ npm run build
 npm run preview
 ```
 
-**Notes:**
-- output is `dist/index.html`
-- release packaging renames it to `management.html`
-- opening `dist/index.html` with `file://` may fail because of browser CORS restrictions
-- using `npm run preview` or another static server is more reliable
+**说明：**
+
+- 构建输出为 `dist/index.html`
+- 发布流程里会重命名为 `management.html`
+- 直接用 `file://` 打开可能会碰到浏览器 CORS 限制
+- 更稳妥的方式是使用 `npm run preview` 或静态服务器访问
 
 ---
 
-## 🔌 How to connect
+## 🔌 如何连接
 
-### 1) API address formats
+### 1）API 地址支持哪些格式
 
-The UI accepts any of the following and normalizes them automatically:
+下面这些格式都可以，UI 会自动归一化：
 
 - `localhost:8317`
 - `http://192.168.1.10:8317`
 - `https://example.com:8317`
 - `http://example.com:8317/v0/management`
 
-### 2) Management key
+### 2）管理密钥是什么
 
-The **management key** is sent as:
+**管理密钥** 会以以下方式发送：
 
 ```text
 Authorization: Bearer <MANAGEMENT_KEY>
 ```
 
-This is **not the same thing** as the proxy `api-keys` managed inside the UI.
+注意，这和 UI 里管理的代理 `api-keys` **不是同一个东西**。
 
-| Item | Purpose |
-|---|---|
-| **Management key** | Access the Web UI / Management API |
-| **API keys** | Authenticate client requests sent to proxy endpoints |
+| 项目         | 用途                             |
+| ------------ | -------------------------------- |
+| **管理密钥** | 用于访问 Web UI / Management API |
+| **API Keys** | 用于客户端调用代理接口           |
 
-### 3) Remote management
+### 3）远程管理
 
-If you access the UI from a non-localhost browser, the server usually needs remote management enabled, for example:
+如果你是从非 localhost 浏览器访问，服务端通常需要开启远程管理，例如：
 
 ```yaml
 allow-remote-management: true
 ```
 
 > [!WARNING]
-> Enabling remote management increases exposure. Treat it as an operational security decision, not just a convenience toggle.
+> 开启远程管理会增加暴露面。别把它当成“顺手一开”的小选项，它本质上是个运维安全决策。
 
 ---
 
-## 🧭 What you can manage
+## 🧭 你可以管理什么
 
-### 📊 Dashboard
-- connection status
-- server version / build date
-- quick counts
-- model availability snapshot
+### 📊 仪表盘
 
-### ⚙️ Basic Settings
-- debug mode
-- proxy URL
-- retry settings
-- quota fallback behavior
-- usage statistics
-- request logging
-- file logging
-- WebSocket auth
+- 连接状态
+- 服务版本 / 构建时间
+- 核心数量概览
+- 可用模型快照
+
+### ⚙️ 基础设置
+
+- 调试模式
+- 代理 URL
+- 重试设置
+- 配额回退策略
+- 使用统计
+- 请求日志
+- 文件日志
+- WebSocket 鉴权
 
 ### 🔑 API Keys
-- add / edit / delete proxy `api-keys`
 
-### 🤖 AI Providers
-- Gemini / Codex / Claude / Vertex provider configs
-- base URL, headers, proxy, model aliases, excluded models, prefix
-- OpenAI-compatible providers with multiple API keys
-- import models from `/v1/models`
-- browser-side `chat/completions` test for OpenAI-compatible providers
-- Ampcode integration
+- 增 / 改 / 删 代理 `api-keys`
 
-### 🪪 Auth Files
-- upload / download / delete JSON credentials
-- search / filter / pagination
-- runtime-only indicators
-- supported-model display when backend supports it
-- OAuth excluded models and model alias mapping
+### 🤖 AI 提供商
+
+- Gemini / Codex / Claude / Vertex 配置
+- Base URL、Headers、代理、模型别名、排除模型、Prefix
+- OpenAI 兼容提供商支持多 API key
+- 支持从 `/v1/models` 导入模型
+- OpenAI 兼容提供商支持浏览器侧 `chat/completions` 测试
+- 支持 Ampcode 集成
+
+### 🪪 认证文件
+
+- 上传 / 下载 / 删除 JSON 凭据
+- 搜索 / 筛选 / 分页
+- runtime-only 标记
+- 后端支持时可查看单个凭据对应模型
+- 管理 OAuth 排除模型与模型别名映射
 
 ### 🔐 OAuth
-- start OAuth / device flows
-- poll status
-- submit optional callback `redirect_url`
-- iFlow cookie import
 
-### 📉 Quota Management
-- manage quota and usage for Claude, Antigravity, Codex, Gemini CLI, and others
+- 发起 OAuth / 设备码流程
+- 轮询状态
+- 提交可选回调 `redirect_url`
+- 导入 iFlow Cookie
 
-### 📈 Usage
-- requests / tokens charts
-- per-API and per-model breakdown
-- cached / reasoning token breakdown
-- RPM / TPM windows
-- optional local pricing-based cost estimation
+### 📉 配额管理
 
-### 🧾 Config
-- edit `/config.yaml` in browser
-- YAML highlighting + search
-- save and reload
+- 管理 Claude、Antigravity、Codex、Gemini CLI 等提供商配额与使用情况
 
-### 📜 Logs
-- incremental log polling
-- auto-refresh
-- search
-- hide management traffic
-- clear logs
-- download request error logs
+### 📈 使用统计
 
-### 🖥 System
-- quick links
-- fetch and group `/v1/models`
-- requires at least one proxy API key
+- 请求 / Token 图表
+- 按 API 和按模型拆分
+- 缓存 / 推理 Token 拆分
+- RPM / TPM 时间窗
+- 支持基于本地价格表的费用估算
+
+### 🧾 配置文件
+
+- 浏览器内编辑 `/config.yaml`
+- YAML 高亮 + 搜索
+- 保存并重载
+
+### 📜 日志
+
+- 增量拉取日志
+- 自动刷新
+- 搜索
+- 隐藏管理流量
+- 清空日志
+- 下载请求错误日志
+
+### 🖥 系统信息
+
+- 快捷链接
+- 拉取并分组展示 `/v1/models`
+- 需要至少一个代理 API key
 
 ---
 
-## 🪜 Typical usage flow
+## 🪜 典型使用流程
 
 ```text
-Open /management.html
+打开 /management.html
         ↓
-Login with management key
+使用管理密钥登录
         ↓
-Check Dashboard for server status
+在仪表盘检查服务状态
         ↓
-Configure API Keys and AI Providers
+配置 API Keys 和 AI 提供商
         ↓
-Upload Auth Files if needed
+按需上传认证文件
         ↓
-Use Logs + Usage to troubleshoot
+用日志 + 使用统计做排障
 ```
 
 ---
 
-## 🧱 Tech stack
+## 🧱 技术栈
 
 - React 19
 - TypeScript 5.9
@@ -271,94 +285,101 @@ Use Logs + Usage to troubleshoot
 
 ---
 
-## 🌍 Internationalization
+## 🌍 多语言支持
 
-Current languages:
-- English (`en`)
-- Simplified Chinese (`zh-CN`)
-- Russian (`ru`)
+当前支持：
 
-The UI language is auto-detected from the browser and can also be switched manually at the bottom of the page.
+- 英文（`en`）
+- 简体中文（`zh-CN`）
+- 俄文（`ru`）
 
----
-
-## 🧪 Browser support
-
-- build target: `ES2020`
-- modern Chrome / Firefox / Safari / Edge
-- responsive layout for tablet and mobile access
+界面语言会根据浏览器自动检测，也可以在页面底部手动切换。
 
 ---
 
-## 📦 Build and release
+## 🧪 浏览器支持
 
-- output is a **single HTML file**: `dist/index.html`
-- assets are inlined via `vite-plugin-singlefile`
-- tagging `vX.Y.Z` triggers `.github/workflows/release.yml`
-- release packaging publishes `dist/management.html`
-- footer version is injected at build time from `VERSION`, git tag, or `package.json`
+- 构建目标：`ES2020`
+- 支持现代 Chrome / Firefox / Safari / Edge
+- 支持平板与移动端响应式布局
 
 ---
 
-## 🔒 Security notes
+## 📦 构建与发布
 
-- the management key is stored in browser `localStorage`
-- it uses a lightweight obfuscation format: `enc::v1::...`
-- treat it as sensitive anyway
-- use a dedicated browser profile/device for management if possible
-- be cautious when enabling remote management
-
----
-
-## 🩺 Troubleshooting
-
-### Can’t connect / 401
-- verify the API address
-- verify the management key
-- check whether remote management is enabled on the server
-
-### Repeated auth failures
-- the server may temporarily block remote IPs after repeated failed attempts
-
-### Logs page missing
-- enable **Logging to file** in **Basic Settings**
-
-### Some features show as unsupported
-- backend version may be too old
-- endpoint may be disabled or missing
-
-### OpenAI provider test fails
-- the test runs in the browser
-- it depends on the provider endpoint network/CORS behavior
-- a browser-side failure does not always mean the server cannot reach the provider
+- 输出为 **单文件 HTML**：`dist/index.html`
+- 资源通过 `vite-plugin-singlefile` 内联
+- 打 `vX.Y.Z` 标签会触发 `.github/workflows/release.yml`
+- 发布产物为 `dist/management.html`
+- 页脚版本号在构建期从 `VERSION`、git tag 或 `package.json` 注入
 
 ---
 
-## 👨‍💻 Development
+## 🔒 安全提示
+
+- 管理密钥会存进浏览器 `localStorage`
+- 存储格式是轻量混淆：`enc::v1::...`
+- 但它依然是敏感信息
+- 建议使用独立浏览器配置或独立设备进行管理
+- 开启远程管理前，请先评估暴露面
+
+---
+
+## 🩺 常见问题
+
+### 无法连接 / 401
+
+- 检查 API 地址
+- 检查管理密钥
+- 确认服务端是否开启远程管理
+
+### 连续认证失败
+
+- 服务端可能会对远程 IP 进行临时封禁
+
+### 日志页面不显示
+
+- 需要在 **基础设置** 中开启 **写入日志文件**
+
+### 某些功能显示 unsupported
+
+- 可能是后端版本太旧
+- 也可能是接口未启用或不存在
+
+### OpenAI 提供商测试失败
+
+- 测试是在浏览器侧执行
+- 会受网络与 CORS 影响
+- 浏览器侧失败不一定代表服务端无法访问上游
+
+---
+
+## 👨‍💻 开发命令
 
 ```bash
-npm run dev        # start Vite dev server
-npm run build      # TypeScript + Vite build
-npm run preview    # preview dist locally
+npm run dev        # 启动 Vite 开发服务器
+npm run build      # TypeScript + Vite 构建
+npm run preview    # 本地预览 dist
 npm run lint       # ESLint
 npm run format     # Prettier
-npm run type-check # TypeScript only
+npm run type-check # 仅执行 TypeScript 检查
 ```
 
 ---
 
-## 🤝 Contributing
+## 🤝 贡献
 
-Issues and PRs are welcome.
+欢迎提 Issue 和 PR。
 
-Please include:
-- reproduction steps
-- server version + UI version
-- screenshots for UI changes
-- verification notes such as `npm run lint` and `npm run type-check`
+建议附上：
+
+- 复现步骤
+- 服务端版本 + UI 版本
+- UI 改动截图
+- 验证记录，例如 `npm run lint`、`npm run type-check`
 
 ---
 
-## 📄 License
+## 📄 许可证
 
 MIT

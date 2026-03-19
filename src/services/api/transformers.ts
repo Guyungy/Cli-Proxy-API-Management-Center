@@ -455,6 +455,21 @@ export const normalizeConfigResponse = (raw: unknown): Config => {
     config.oauthExcludedModels = oauthExcluded;
   }
 
+  const auditRiskRulesRaw = raw['audit-risk-rules'] ?? raw.auditRiskRules;
+  if (isRecord(auditRiskRulesRaw)) {
+    config.auditRiskRules = {
+      sensitive: Array.isArray(auditRiskRulesRaw.sensitive)
+        ? auditRiskRulesRaw.sensitive.map((item) => String(item)).filter(Boolean)
+        : [],
+      privilege: Array.isArray(auditRiskRulesRaw.privilege)
+        ? auditRiskRulesRaw.privilege.map((item) => String(item)).filter(Boolean)
+        : [],
+      violation: Array.isArray(auditRiskRulesRaw.violation)
+        ? auditRiskRulesRaw.violation.map((item) => String(item)).filter(Boolean)
+        : [],
+    };
+  }
+
   return config;
 };
 

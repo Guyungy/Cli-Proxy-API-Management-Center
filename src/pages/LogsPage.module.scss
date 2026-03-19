@@ -17,13 +17,87 @@
   font-size: 28px;
   font-weight: 700;
   color: var(--text-primary);
-  margin: 0 0 $spacing-lg 0;
+  margin: 0;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.9fr);
+  gap: $spacing-md;
+  margin-bottom: $spacing-md;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.heroCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: var(--secondary);
+  color: var(--primary-color);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.description {
+  max-width: 760px;
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.summaryGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.summaryCard {
+  padding: 12px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-color);
+  background: color-mix(in srgb, var(--bg-primary) 92%, transparent);
+  backdrop-filter: blur(16px);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.summaryLabel {
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.summaryValue {
+  color: var(--text-primary);
+  font-size: 26px;
+  font-weight: 800;
 }
 
 .tabBar {
   display: flex;
   gap: $spacing-xs;
-  margin-bottom: $spacing-lg;
+  margin-bottom: $spacing-md;
   padding: 6px;
   border: 1px solid var(--border-color);
   border-radius: calc(var(--radius) - 4px);
@@ -91,6 +165,39 @@
   }
 }
 
+.errorCard {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.sectionShell {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: $spacing-md;
+  flex-wrap: wrap;
+}
+
+.sectionTitle {
+  color: var(--text-primary);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.sectionHintText {
+  margin-top: 4px;
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
 .toolbar {
   display: flex;
   align-items: center;
@@ -103,6 +210,14 @@
     margin-left: 0;
     width: 100%;
   }
+}
+
+.optionsRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-md;
+  flex-wrap: wrap;
 }
 
 .filters {

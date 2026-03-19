@@ -14,6 +14,21 @@
   gap: $spacing-sm;
 }
 
+.pageHeader::before {
+  content: 'Auth Files';
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: var(--secondary);
+  color: var(--primary-color);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
 .pageTitle {
   font-size: 28px;
   font-weight: 700;

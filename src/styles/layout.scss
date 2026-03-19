@@ -25,8 +25,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: $spacing-md;
-  padding: $spacing-md $spacing-lg;
+  gap: $spacing-sm;
+  padding: 10px $spacing-md;
   background: color-mix(in srgb, var(--bg-primary) 84%, transparent);
   border-bottom: 1px solid var(--border-color);
   backdrop-filter: blur(18px);
@@ -471,10 +471,10 @@
   background: color-mix(in srgb, var(--bg-primary) 88%, transparent);
   border-right: 1px solid var(--border-color);
   backdrop-filter: blur(22px);
-  padding: $spacing-md;
+  padding: $spacing-sm;
   display: flex;
   flex-direction: column;
-  gap: $spacing-lg;
+  gap: $spacing-md;
   transition:
     width $transition-normal,
     transform $transition-normal;
@@ -602,10 +602,10 @@
 
 .main-content {
   flex: 1 0 auto;
-  padding: $spacing-lg;
+  padding: $spacing-md;
   display: flex;
   flex-direction: column;
-  gap: $spacing-lg;
+  gap: $spacing-md;
   overflow-x: hidden;
 
   &.main-content-logs {
@@ -621,13 +621,13 @@
   }
 
   @media (max-width: $breakpoint-mobile) {
-    padding: $spacing-md;
+    padding: $spacing-sm;
   }
 }
 
 .grid {
   display: grid;
-  gap: $spacing-lg;
+  gap: $spacing-md;
 }
 
 @media (min-width: $breakpoint-tablet) {

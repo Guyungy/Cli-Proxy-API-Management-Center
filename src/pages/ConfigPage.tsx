@@ -472,8 +472,21 @@ export function ConfigPage() {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.pageTitle}>{t('config_management.title')}</h1>
-      <p className={styles.description}>{t('config_management.description')}</p>
+      <div className={styles.hero}>
+        <div className={styles.heroCopy}>
+          <span className={styles.eyebrow}>Configuration</span>
+          <h1 className={styles.pageTitle}>{t('config_management.title')}</h1>
+          <p className={styles.description}>{t('config_management.description')}</p>
+        </div>
+        <div className={styles.heroMeta}>
+          <div className={styles.heroMetaCard}>
+            <span className={styles.heroMetaLabel}>
+              {t('config_management.status_label', { defaultValue: 'Editor status' })}
+            </span>
+            <span className={`${styles.statusValue} ${styles.status} ${getStatusClass()}`}>{getStatusText()}</span>
+          </div>
+        </div>
+      </div>
 
       <div className={styles.tabBar}>
         <button

@@ -341,15 +341,43 @@ export function SystemPage() {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.pageTitle}>{t('system_info.title')}</h1>
-      <div className={styles.content}>
-        <Card className={styles.aboutCard}>
-          <div className={styles.aboutHeader}>
+      <div className={styles.hero}>
+        <div className={styles.heroCard}>
+          <div className={styles.heroLogoWrap}>
             <img src={INLINE_LOGO_JPEG} alt="CPAMC" className={styles.aboutLogo} />
-            <div className={styles.aboutTitle}>{t('system_info.about_title')}</div>
+          </div>
+          <div className={styles.heroCopy}>
+            <span className={styles.eyebrow}>Control Center</span>
+            <h1 className={styles.pageTitle}>{t('system_info.title')}</h1>
+            <p className={styles.heroDescription}>{t('system_info.about_title')}</p>
+          </div>
+        </div>
+        <div className={styles.statusGrid}>
+          <div className={styles.statusCard}>
+            <span className={styles.statusLabel}>{t('connection.status')}</span>
+            <span className={styles.statusValue}>{t(`common.${auth.connectionStatus}_status`)}</span>
+            <span className={styles.statusMeta}>{auth.apiBase || '-'}</span>
+          </div>
+          <div className={styles.statusCard}>
+            <span className={styles.statusLabel}>{t('footer.api_version')}</span>
+            <span className={styles.statusValue}>{apiVersion}</span>
+            <span className={styles.statusMeta}>{buildTime}</span>
+          </div>
+        </div>
+      </div>
+
+      <div className={styles.content}>
+        <Card>
+          <div className={styles.sectionHeader}>
+            <div>
+              <div className={styles.sectionTitle}>{t('system_info.title')}</div>
+              <p className={styles.sectionDescription}>
+                {t('system_info.quick_links_desc')}
+              </p>
+            </div>
           </div>
 
-          <div className={styles.aboutInfoGrid}>
+          <div className={styles.statsGrid}>
             <button
               type="button"
               className={`${styles.infoTile} ${styles.tapTile}`}
@@ -387,6 +415,12 @@ export function SystemPage() {
               <div className={styles.tileLabel}>{t('connection.status')}</div>
               <div className={styles.tileValue}>{t(`common.${auth.connectionStatus}_status`)}</div>
               <div className={styles.tileSub}>{auth.apiBase || '-'}</div>
+            </div>
+
+            <div className={styles.infoTile}>
+              <div className={styles.tileLabel}>{t('system_info.audit_risk_rules', { defaultValue: '审查词库' })}</div>
+              <div className={styles.tileValue}>{config?.auditRiskRules?.sensitive?.length || 0}</div>
+              <div className={styles.tileSub}>{t('system_info.audit_risk_rules_desc', { defaultValue: '通过 config.yaml 的 audit-risk-rules 配置风险词。' })}</div>
             </div>
           </div>
         </Card>

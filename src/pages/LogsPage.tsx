@@ -114,6 +114,7 @@ export function LogsPage() {
   const latestTimestampRef = useRef<number>(0);
 
   const disableControls = connectionStatus !== 'connected';
+  const parsedLineCount = logState.buffer.length;
 
   const loadLogs = async (incremental = false) => {
     if (connectionStatus !== 'connected') {
@@ -360,6 +361,7 @@ export function LogsPage() {
   );
 
   const rawVisibleText = useMemo(() => filteredLines.join('\n'), [filteredLines]);
+  const visibleLineCount = filteredLines.length;
 
   const scroller = useLogScroller({
     logState,
@@ -460,7 +462,38 @@ export function LogsPage() {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.pageTitle}>{t('logs.title')}</h1>
+      <div className={styles.hero}>
+        <div className={styles.heroCopy}>
+          <span className={styles.eyebrow}>Observability</span>
+          <h1 className={styles.pageTitle}>{t('logs.title')}</h1>
+          <p className={styles.description}>
+            {t('logs.page_description', {
+              defaultValue:
+                'Inspect live service logs, isolate structured events, and download request traces for governed review.',
+            })}
+          </p>
+        </div>
+        <div className={styles.summaryGrid}>
+          <div className={styles.summaryCard}>
+            <span className={styles.summaryLabel}>
+              {t('logs.summary_total', { defaultValue: 'Buffered lines' })}
+            </span>
+            <span className={styles.summaryValue}>{parsedLineCount}</span>
+          </div>
+          <div className={styles.summaryCard}>
+            <span className={styles.summaryLabel}>
+              {t('logs.summary_visible', { defaultValue: 'Visible lines' })}
+            </span>
+            <span className={styles.summaryValue}>{visibleLineCount}</span>
+          </div>
+          <div className={styles.summaryCard}>
+            <span className={styles.summaryLabel}>
+              {t('logs.summary_errors', { defaultValue: 'Error logs' })}
+            </span>
+            <span className={styles.summaryValue}>{errorLogs.length}</span>
+          </div>
+        </div>
+      </div>
 
       <div className={styles.tabBar}>
         <button
@@ -483,66 +516,87 @@ export function LogsPage() {
         {activeTab === 'logs' && (
           <Card className={styles.logCard}>
             {error && <div className="error-box">{error}</div>}
-
-            <div className={styles.filters}>
-              <div className={styles.searchWrapper}>
-                <Input
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder={t('logs.search_placeholder')}
-                  className={styles.searchInput}
-                  rightElement={
-                    searchQuery ? (
-                      <button
-                        type="button"
-                        className={styles.searchClear}
-                        onClick={() => setSearchQuery('')}
-                        title="Clear"
-                        aria-label="Clear"
-                      >
-                        <IconX size={16} />
-                      </button>
-                    ) : (
-                      <IconSearch size={16} className={styles.searchIcon} />
-                    )
-                  }
-                />
+            <div className={styles.sectionShell}>
+              <div className={styles.sectionHeader}>
+                <div>
+                  <div className={styles.sectionTitle}>
+                    {t('logs.log_content', { defaultValue: 'Log stream' })}
+                  </div>
+                  <div className={styles.sectionHintText}>
+                    {t('logs.log_stream_hint', {
+                      defaultValue: 'Search, filter, and export structured runtime events.',
+                    })}
+                  </div>
+                </div>
+                <div className={styles.filterStats}>
+                  <span>{t('logs.loaded_lines', { count: visibleLineCount })}</span>
+                  {removedCount > 0 && (
+                    <span className={styles.removedCount}>
+                      {t('logs.filtered_lines', { count: removedCount })}
+                    </span>
+                  )}
+                </div>
               </div>
 
-              <div className={styles.filterPanelHeader}>
-                <Button
-                  type="button"
-                  variant="secondary"
-                  size="sm"
-                  className={styles.filterPanelToggle}
-                  onClick={() => setStructuredFiltersExpanded((prev) => !prev)}
-                  aria-expanded={structuredFiltersExpanded}
-                  aria-controls={structuredFiltersPanelId}
-                  title={
-                    structuredFiltersExpanded
-                      ? t('logs.filter_panel_collapse')
-                      : t('logs.filter_panel_expand')
-                  }
-                >
-                  <span className={styles.filterPanelButtonContent}>
-                    <IconSlidersHorizontal size={16} />
-                    <span>{t('logs.filter_panel_title')}</span>
-                    {structuredFilterCount > 0 && (
-                      <span className={styles.filterPanelCount}>
-                        {t('logs.filter_panel_active_count', { count: structuredFilterCount })}
-                      </span>
-                    )}
-                    {structuredFiltersExpanded ? (
-                      <IconChevronUp size={16} />
-                    ) : (
-                      <IconChevronDown size={16} />
-                    )}
-                  </span>
-                </Button>
-              </div>
+              <div className={styles.filters}>
+                <div className={styles.searchWrapper}>
+                  <Input
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder={t('logs.search_placeholder')}
+                    className={styles.searchInput}
+                    rightElement={
+                      searchQuery ? (
+                        <button
+                          type="button"
+                          className={styles.searchClear}
+                          onClick={() => setSearchQuery('')}
+                          title="Clear"
+                          aria-label="Clear"
+                        >
+                          <IconX size={16} />
+                        </button>
+                      ) : (
+                        <IconSearch size={16} className={styles.searchIcon} />
+                      )
+                    }
+                  />
+                </div>
 
-              {structuredFiltersExpanded && (
-                <div id={structuredFiltersPanelId} className={styles.structuredFilters}>
+                <div className={styles.filterPanelHeader}>
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    size="sm"
+                    className={styles.filterPanelToggle}
+                    onClick={() => setStructuredFiltersExpanded((prev) => !prev)}
+                    aria-expanded={structuredFiltersExpanded}
+                    aria-controls={structuredFiltersPanelId}
+                    title={
+                      structuredFiltersExpanded
+                        ? t('logs.filter_panel_collapse')
+                        : t('logs.filter_panel_expand')
+                    }
+                  >
+                    <span className={styles.filterPanelButtonContent}>
+                      <IconSlidersHorizontal size={16} />
+                      <span>{t('logs.filter_panel_title')}</span>
+                      {structuredFilterCount > 0 && (
+                        <span className={styles.filterPanelCount}>
+                          {t('logs.filter_panel_active_count', { count: structuredFilterCount })}
+                        </span>
+                      )}
+                      {structuredFiltersExpanded ? (
+                        <IconChevronUp size={16} />
+                      ) : (
+                        <IconChevronDown size={16} />
+                      )}
+                    </span>
+                  </Button>
+                </div>
+
+                {structuredFiltersExpanded && (
+                  <div id={structuredFiltersPanelId} className={styles.structuredFilters}>
                   <div className={styles.filterChipGroup}>
                     <span className={styles.filterChipLabel}>{t('logs.filter_method')}</span>
                     <div className={styles.filterChipList}>
@@ -623,81 +677,84 @@ export function LogsPage() {
                 </div>
               )}
 
-              <ToggleSwitch
-                checked={hideManagementLogs}
-                onChange={setHideManagementLogs}
-                label={
-                  <span className={styles.switchLabel}>
-                    <IconEyeOff size={16} />
-                    {t('logs.hide_management_logs', { prefix: MANAGEMENT_API_PREFIX })}
-                  </span>
-                }
-              />
+                <div className={styles.optionsRow}>
+                  <ToggleSwitch
+                    checked={hideManagementLogs}
+                    onChange={setHideManagementLogs}
+                    label={
+                      <span className={styles.switchLabel}>
+                        <IconEyeOff size={16} />
+                        {t('logs.hide_management_logs', { prefix: MANAGEMENT_API_PREFIX })}
+                      </span>
+                    }
+                  />
 
-              <ToggleSwitch
-                checked={showRawLogs}
-                onChange={setShowRawLogs}
-                label={
-                  <span
-                    className={styles.switchLabel}
-                    title={t('logs.show_raw_logs_hint', {
-                      defaultValue: 'Show original log text for easier multi-line copy',
-                    })}
-                  >
-                    <IconCode size={16} />
-                    {t('logs.show_raw_logs', { defaultValue: 'Show raw logs' })}
-                  </span>
-                }
-              />
+                  <ToggleSwitch
+                    checked={showRawLogs}
+                    onChange={setShowRawLogs}
+                    label={
+                      <span
+                        className={styles.switchLabel}
+                        title={t('logs.show_raw_logs_hint', {
+                          defaultValue: 'Show original log text for easier multi-line copy',
+                        })}
+                      >
+                        <IconCode size={16} />
+                        {t('logs.show_raw_logs', { defaultValue: 'Show raw logs' })}
+                      </span>
+                    }
+                  />
 
-              <div className={styles.toolbar}>
-                <Button
-                  variant="secondary"
-                  size="sm"
-                  onClick={() => loadLogs(false)}
-                  disabled={disableControls || loading}
-                  className={styles.actionButton}
-                >
-                  <span className={styles.buttonContent}>
-                    <IconRefreshCw size={16} />
-                    {t('logs.refresh_button')}
-                  </span>
-                </Button>
-                <ToggleSwitch
-                  checked={autoRefresh}
-                  onChange={(value) => setAutoRefresh(value)}
-                  disabled={disableControls}
-                  label={
-                    <span className={styles.switchLabel}>
-                      <IconTimer size={16} />
-                      {t('logs.auto_refresh')}
-                    </span>
-                  }
-                />
-                <Button
-                  variant="secondary"
-                  size="sm"
-                  onClick={downloadLogs}
-                  disabled={logState.buffer.length === 0}
-                  className={styles.actionButton}
-                >
-                  <span className={styles.buttonContent}>
-                    <IconDownload size={16} />
-                    {t('logs.download_button')}
-                  </span>
-                </Button>
-                <Button
-                  variant="danger"
-                  size="sm"
-                  onClick={clearLogs}
-                  disabled={disableControls}
-                  className={styles.actionButton}
-                >
-                  <span className={styles.buttonContent}>
-                    <IconTrash2 size={16} />
-                    {t('logs.clear_button')}
-                  </span>
-                </Button>
+                  <div className={styles.toolbar}>
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      onClick={() => loadLogs(false)}
+                      disabled={disableControls || loading}
+                      className={styles.actionButton}
+                    >
+                      <span className={styles.buttonContent}>
+                        <IconRefreshCw size={16} />
+                        {t('logs.refresh_button')}
+                      </span>
+                    </Button>
+                    <ToggleSwitch
+                      checked={autoRefresh}
+                      onChange={(value) => setAutoRefresh(value)}
+                      disabled={disableControls}
+                      label={
+                        <span className={styles.switchLabel}>
+                          <IconTimer size={16} />
+                          {t('logs.auto_refresh')}
+                        </span>
+                      }
+                    />
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      onClick={downloadLogs}
+                      disabled={logState.buffer.length === 0}
+                      className={styles.actionButton}
+                    >
+                      <span className={styles.buttonContent}>
+                        <IconDownload size={16} />
+                        {t('logs.download_button')}
+                      </span>
+                    </Button>
+                    <Button
+                      variant="danger"
+                      size="sm"
+                      onClick={clearLogs}
+                      disabled={disableControls}
+                      className={styles.actionButton}
+                    >
+                      <span className={styles.buttonContent}>
+                        <IconTrash2 size={16} />
+                        {t('logs.clear_button')}
+                      </span>
+                    </Button>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -860,6 +917,7 @@ export function LogsPage() {
 
         {activeTab === 'errors' && (
           <Card
+            className={styles.errorCard}
             extra={
               <Button
                 variant="secondary"
@@ -873,8 +931,14 @@ export function LogsPage() {
             }
           >
             <div className="stack">
-              <div className="hint">{t('logs.error_logs_description')}</div>
-
+              <div className={styles.sectionHeader}>
+                <div>
+                  <div className={styles.sectionTitle}>
+                    {t('logs.error_logs_modal_title', { defaultValue: 'Error request logs' })}
+                  </div>
+                  <div className={styles.sectionHintText}>{t('logs.error_logs_description')}</div>
+                </div>
+              </div>
               {requestLogEnabled && (
                 <div>
                   <div className="status-badge warning">{t('logs.error_logs_request_log_enabled')}</div>

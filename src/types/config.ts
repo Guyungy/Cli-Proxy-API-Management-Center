@@ -11,6 +11,12 @@ export interface QuotaExceededConfig {
   switchPreviewModel?: boolean;
 }
 
+export interface AuditRiskRulesConfig {
+  sensitive?: string[];
+  privilege?: string[];
+  violation?: string[];
+}
+
 export interface Config {
   debug?: boolean;
   proxyUrl?: string;
@@ -31,6 +37,7 @@ export interface Config {
   vertexApiKeys?: ProviderKeyConfig[];
   openaiCompatibility?: OpenAIProviderConfig[];
   oauthExcludedModels?: Record<string, string[]>;
+  auditRiskRules?: AuditRiskRulesConfig;
   raw?: Record<string, unknown>;
 }
 
@@ -53,7 +60,8 @@ export type RawConfigSection =
   | 'claude-api-key'
   | 'vertex-api-key'
   | 'openai-compatibility'
-  | 'oauth-excluded-models';
+  | 'oauth-excluded-models'
+  | 'audit-risk-rules';
 
 export interface ConfigCache {
   data: Config;

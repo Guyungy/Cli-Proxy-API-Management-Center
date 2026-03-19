@@ -11,6 +11,67 @@
   );
 }
 
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(240px, 0.8fr);
+  gap: $spacing-md;
+  margin-bottom: $spacing-sm;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.heroCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: var(--secondary);
+  color: var(--primary-color);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.heroMeta {
+  display: flex;
+  align-items: stretch;
+}
+
+.heroMetaCard {
+  width: 100%;
+  padding: 12px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-color);
+  background: color-mix(in srgb, var(--bg-primary) 92%, transparent);
+  backdrop-filter: blur(16px);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.heroMetaLabel {
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.statusValue {
+  font-size: 18px;
+  font-weight: 700;
+}
+
 .pageTitle {
   font-size: 28px;
   font-weight: 700;
@@ -21,7 +82,7 @@
 .description {
   font-size: 14px;
   color: var(--text-secondary);
-  margin: 0 0 $spacing-xl 0;
+  margin: 0 0 $spacing-md 0;
 }
 
 .tabBar {
@@ -29,10 +90,11 @@
   align-items: center;
   gap: 4px;
   padding: 4px;
-  margin-bottom: $spacing-lg;
+  margin-bottom: $spacing-md;
   border: 1px solid var(--border-color);
-  background: var(--bg-secondary);
-  border-radius: $radius-full;
+  background: color-mix(in srgb, var(--bg-primary) 88%, transparent);
+  border-radius: calc(var(--radius) - 4px);
+  backdrop-filter: blur(14px);
   width: fit-content;
   max-width: 100%;
   overflow-x: auto;
@@ -59,7 +121,7 @@
   color: var(--text-secondary);
   background: transparent;
   border: 1px solid transparent;
-  border-radius: $radius-full;
+  border-radius: var(--radius-sm);
   cursor: pointer;
   transition:
     background-color 0.15s ease,
@@ -89,8 +151,8 @@
 
 .tabActive {
   color: var(--text-primary);
-  background: var(--bg-primary);
-  border-color: var(--border-color);
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(14, 165, 233, 0.1));
+  border-color: rgba(37, 99, 235, 0.2);
   box-shadow: var(--shadow);
 }
 
@@ -299,6 +361,7 @@
   flex: 1;
   min-height: 0;
   overflow: visible;
+  border-radius: var(--radius);
 }
 
 .actions {

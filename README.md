@@ -313,6 +313,32 @@ allow-remote-management: true
 - 发布产物为 `dist/management.html`
 - 页脚版本号在构建期从 `VERSION`、git tag 或 `package.json` 注入
 
+### 自动上传 Releases（Tag 触发）
+
+发布工作流仅在 `push tag` 且 tag 匹配 `v*` 时触发。
+
+- 会触发：`v1.7.11`、`v2026.03.19-1`
+- 不会触发：只改 `README` 后直接 `git push` 分支
+- 同一个 tag 只会触发一次；重复 `git push origin <existing-tag>` 会显示 `Everything up-to-date`
+
+创建并推送一个新 tag：
+
+```bash
+git tag -a "v2026.03.19-1" -m "release v2026.03.19-1"
+git push origin "v2026.03.19-1"
+```
+
+可在以下页面查看流程和产物：
+
+- Actions: `https://github.com/Guyungy/Cli-Proxy-API-Management-Center/actions/workflows/release.yml`
+- Releases: `https://github.com/Guyungy/Cli-Proxy-API-Management-Center/releases`
+
+服务器可通过下列地址同步最新 `management.html`：
+
+```bash
+curl -L -o /path/to/management.html https://github.com/Guyungy/Cli-Proxy-API-Management-Center/releases/latest/download/management.html
+```
+
 ---
 
 ## 🔒 安全提示
